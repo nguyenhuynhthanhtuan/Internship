@@ -1,0 +1,239 @@
+<mxfile host="app.diagrams.net" agent="Claude">
+  <diagram name="IRMS Architecture" id="irms-arch-4">
+    <mxGraphModel dx="1086" dy="600" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="2900" pageHeight="1400" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bg" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=none;fontSize=15;fontFamily=Times New Roman;fontStyle=1;labelBackgroundColor=none;labelBorderColor=none;textShadow=0;" value="" vertex="1">
+          <mxGeometry height="1400" width="2900" as="geometry" />
+        </mxCell>
+        <mxCell id="awsCloud" parent="1" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=15;fontStyle=1;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_aws_cloud_alt;strokeColor=#232F3E;fillColor=none;verticalAlign=top;align=left;spacingLeft=35;fontColor=#232F3E;dashed=0;fontFamily=Times New Roman;" value="AWS Cloud" vertex="1">
+          <mxGeometry height="1220" width="2480" x="260" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="waf" parent="awsCloud" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.waf;fontFamily=Times New Roman;" value="AWS WAF&#xa;Edge — Web ACL" vertex="1">
+          <mxGeometry height="90" width="90" x="627" y="60" as="geometry" />
+        </mxCell>
+        <mxCell id="region" parent="1" style="points=[[0,0],[0.25,0],[0.5,0],[0.75,0],[1,0],[1,0.25],[1,0.5],[1,0.75],[1,1],[0.75,1],[0.5,1],[0.25,1],[0,1],[0,0.75],[0,0.5],[0,0.25]];outlineConnect=0;gradientColor=none;html=1;whiteSpace=wrap;fontSize=15;fontStyle=1;container=1;pointerEvents=0;collapsible=0;recursiveResize=0;shape=mxgraph.aws4.group;grIcon=mxgraph.aws4.group_region;strokeColor=#147EBA;fillColor=none;verticalAlign=top;align=left;spacingLeft=35;fontColor=#147EBA;dashed=1;fontFamily=Times New Roman;" value="Region: ap-southeast-1 (Singapore)&amp;nbsp;" vertex="1">
+          <mxGeometry height="900" width="2100" x="500" y="320" as="geometry" />
+        </mxCell>
+        <mxCell id="lambdaReport" parent="region" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;fontFamily=Times New Roman;" value="Lambda&#xa;Regional — Generate Report" vertex="1">
+          <mxGeometry height="90" width="90" x="825" y="380" as="geometry" />
+        </mxCell>
+        <mxCell id="s3evidence" parent="region" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;fontFamily=Times New Roman;" value="S3&#xa;Regional — Evidence Store" vertex="1">
+          <mxGeometry height="90" width="90" x="632" y="542" as="geometry" />
+        </mxCell>
+        <mxCell id="e15" edge="1" parent="region" source="lambdaReport" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;fontFamily=Times New Roman;fontStyle=1" target="s3evidence" value="15. Write PDF / CSV">
+          <mxGeometry relative="1" x="0.2679" y="2" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="797" y="425" />
+              <mxPoint x="797" y="587" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="dynamodb" parent="region" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#C925D1;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.dynamodb;fontFamily=Times New Roman;" value="DynamoDB&#xa;Regional — Incidents/Timeline/Users" vertex="1">
+          <mxGeometry height="90" width="90" x="413" y="735" as="geometry" />
+        </mxCell>
+        <mxCell id="e14" edge="1" parent="region" source="lambdaReport" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;fontFamily=Times New Roman;fontStyle=1" target="dynamodb" value="14. Read aggregated data">
+          <mxGeometry relative="1" x="0.3527" y="-5" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="954" y="425" />
+              <mxPoint x="954" y="780" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e18" edge="1" parent="region" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Times New Roman;fontStyle=1" value="18. Auto-create Incident">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1095" y="807" />
+            </Array>
+            <mxPoint x="1095" y="497" as="sourcePoint" />
+            <mxPoint x="503" y="807" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="secGroup" parent="1" style="rounded=0;whiteSpace=wrap;html=1;dashed=1;dashPattern=8 4;strokeColor=#666666;fillColor=none;verticalAlign=top;align=left;spacingLeft=15;fontColor=#666666;fontSize=15;fontFamily=Times New Roman;fontStyle=1" value="Security &amp;amp; AI Services (Regional)" vertex="1">
+          <mxGeometry height="640" width="500" x="2050" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="user" parent="1" style="shape=actor;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;fontSize=15;verticalLabelPosition=bottom;verticalAlign=top;fontFamily=Times New Roman;fontStyle=1" value="User&#xa;(Security Analyst / Manager)" vertex="1">
+          <mxGeometry height="120" width="110" x="58" y="832" as="geometry" />
+        </mxCell>
+        <mxCell id="browser" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f5f5f5;strokeColor=#666666;fontSize=15;fontFamily=Times New Roman;fontStyle=1" value="Web Browser&#xa;(React SPA)" vertex="1">
+          <mxGeometry height="100" width="140" x="50" y="620" as="geometry" />
+        </mxCell>
+        <mxCell id="route53" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.route_53;fontFamily=Times New Roman;" value="Route 53&#xa;Global — DNS" vertex="1">
+          <mxGeometry height="90" width="90" x="310" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="cloudfront" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cloudfront;fontFamily=Times New Roman;" value="CloudFront&#xa;Edge — CDN" vertex="1">
+          <mxGeometry height="90" width="90" x="570" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="s3web" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#7AA116;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.s3;fontFamily=Times New Roman;" value="S3&#xa;Regional — Web Hosting" vertex="1">
+          <mxGeometry height="90" width="90" x="1090" y="120" as="geometry" />
+        </mxCell>
+        <mxCell id="apigw" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#8C4FFF;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.api_gateway;fontFamily=Times New Roman;" value="API Gateway&#xa;Regional — REST" vertex="1">
+          <mxGeometry height="90" width="90" x="910" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="cognito" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.cognito;fontFamily=Times New Roman;" value="Amazon Cognito&#xa;Regional — Auth" vertex="1">
+          <mxGeometry height="90" width="90" x="1170" y="420" as="geometry" />
+        </mxCell>
+        <mxCell id="lambdaIncident" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;fontFamily=Times New Roman;" value="Lambda&#xa;Regional — Incident CRUD" vertex="1">
+          <mxGeometry height="90" width="90" x="652" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="lambdaEvidence" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;fontFamily=Times New Roman;" value="Lambda&#xa;Regional — Upload Evidence" vertex="1">
+          <mxGeometry height="90" width="90" x="913" y="709" as="geometry" />
+        </mxCell>
+        <mxCell id="lambdaAlert" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;fontFamily=Times New Roman;" value="Lambda&#xa;Regional — Alert / Auto-remediation" vertex="1">
+          <mxGeometry height="90" width="90" x="1550" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="lambdaAI" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#ED7100;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.lambda;fontFamily=Times New Roman;" value="Lambda&#xa;Regional — AI Incident Assistant" vertex="1">
+          <mxGeometry height="90" width="90" x="1810" y="700" as="geometry" />
+        </mxCell>
+        <mxCell id="guardduty" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.guardduty;fontFamily=Times New Roman;" value="Amazon GuardDuty&#xa;Regional — Threat detection" vertex="1">
+          <mxGeometry height="90" width="90" x="2100" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="eventbridge" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.eventbridge;fontFamily=Times New Roman;" value="EventBridge&#xa;Regional — Rules / Scheduler" vertex="1">
+          <mxGeometry height="90" width="90" x="2401" y="480" as="geometry" />
+        </mxCell>
+        <mxCell id="secrets" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#DD344C;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.secrets_manager;fontFamily=Times New Roman;" value="Secrets Manager&#xa;Regional — Read credentials" vertex="1">
+          <mxGeometry height="90" width="90" x="2100" y="680" as="geometry" />
+        </mxCell>
+        <mxCell id="sns" parent="1" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;fillColor=#E7157B;strokeColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=15;fontStyle=1;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.sns;fontFamily=Times New Roman;" value="Amazon SNS&#xa;Regional — Notify team" vertex="1">
+          <mxGeometry height="90" width="90" x="2401" y="683" as="geometry" />
+        </mxCell>
+        <mxCell id="e1" edge="1" parent="1" source="user" style="endArrow=block;html=1;dashed=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.451;entryY=0.998;entryDx=0;entryDy=0;fontFamily=Times New Roman;entryPerimeter=0;fontStyle=1" target="browser" value="1. Sign in / JWT">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="113" y="828" />
+              <mxPoint x="114" y="828" />
+              <mxPoint x="114" y="720" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e2" edge="1" parent="1" source="browser" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.3;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="route53" value="2. DNS lookup">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e3" edge="1" parent="1" source="route53" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.4;exitDx=0;exitDy=0;entryX=0;entryY=0.4;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="cloudfront" value="3. Resolve to CDN">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e4" edge="1" parent="1" source="cloudfront" style="endArrow=block;startArrow=block;html=1;dashed=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.6;exitDx=0;exitDy=0;entryX=0;entryY=0.6;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="waf" value="4. Inspect request">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e5" edge="1" parent="1" source="cloudfront" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="s3web" value="5. Serve static assets">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="615" y="90" />
+              <mxPoint x="1135" y="90" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e6" edge="1" parent="1" source="cloudfront" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="apigw" value="6. Forward /api/">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="615" y="296" />
+              <mxPoint x="937" y="296" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e7" edge="1" parent="1" source="apigw" style="endArrow=block;startArrow=block;html=1;dashed=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="cognito" value="7. JWT Authorizer">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e8" edge="1" parent="1" source="apigw" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;entryX=0.6;entryY=0;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="lambdaIncident" value="8. Invoke">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e9" edge="1" parent="1" source="apigw" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;fontFamily=Times New Roman;fontStyle=1" target="lambdaEvidence" value="9. Invoke">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="955" y="727" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e10" edge="1" parent="1" source="lambdaIncident" style="endArrow=block;startArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;fontFamily=Times New Roman;fontStyle=1" target="dynamodb" value="10. Read / Write">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="702" y="1101" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e11" edge="1" parent="1" source="lambdaEvidence" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;fontFamily=Times New Roman;fontStyle=1" target="s3evidence" value="11. Write file">
+          <mxGeometry relative="1" x="0.2604" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1103" y="745" />
+              <mxPoint x="1103" y="907" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e12" edge="1" parent="1" source="lambdaEvidence" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="dynamodb" value="12. Write metadata">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="e13" edge="1" parent="1" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;fontFamily=Times New Roman;fontStyle=1" target="lambdaReport" value="13. Monthly cron">
+          <mxGeometry relative="1" x="-0.0816" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="2456" y="375" />
+              <mxPoint x="1375" y="375" />
+            </Array>
+            <mxPoint x="2455.9999999999995" y="484" as="sourcePoint" />
+            <mxPoint x="1379" y="702" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e16" edge="1" parent="1" source="guardduty" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;fontFamily=Times New Roman;fontStyle=1" target="eventbridge" value="16. Finding event">
+          <mxGeometry relative="1" x="-0.2538" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="2458" y="525" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e17" edge="1" parent="1" source="eventbridge" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;entryX=0.6;entryY=0;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="lambdaAlert" value="17. Rule match">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1604" y="644" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e19" edge="1" parent="1" source="lambdaAlert" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.3;exitDx=0;exitDy=0;fontFamily=Times New Roman;fontStyle=1" target="sns" value="19. Notify">
+          <mxGeometry relative="1" x="0.2" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1728" y="727" />
+              <mxPoint x="1728" y="907" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e20" edge="1" parent="1" source="apigw" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=0.9;exitY=1;exitDx=0;exitDy=0;entryX=0.3;entryY=0;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="lambdaAI" value="20. Invoke">
+          <mxGeometry relative="1" x="-0.137" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="991" y="563" />
+              <mxPoint x="1837" y="563" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e22" edge="1" parent="1" source="lambdaAI" style="endArrow=block;startArrow=block;html=1;dashed=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;exitX=1;exitY=0.4;exitDx=0;exitDy=0;fontFamily=Times New Roman;fontStyle=1" target="secrets" value="22. Read credentials">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="2082" y="736" />
+              <mxPoint x="2082" y="736" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="groq" parent="1" style="rounded=1;arcSize=10;whiteSpace=wrap;html=1;fillColor=#4285F4;strokeColor=#ffffff;fontColor=#FFFFFF;fontSize=15;fontStyle=1;verticalAlign=middle;align=center;fontFamily=Times New Roman;" value="Groq API&#xa;(External — AI Service)" vertex="1">
+          <mxGeometry height="80" width="200" x="2150" y="1060" as="geometry" />
+        </mxCell>
+        <mxCell id="geminiLabel" parent="1" style="text;html=1;align=center;verticalAlign=top;fontSize=15;fontColor=#888888;whiteSpace=wrap;fontFamily=Times New Roman;fontStyle=1" value="⚠ External API&#xa;key lưu trong Secrets Manager" vertex="1">
+          <mxGeometry height="40" width="240" x="2130" y="1146" as="geometry" />
+        </mxCell>
+        <mxCell id="e21" edge="1" parent="1" source="lambdaAI" style="endArrow=block;html=1;fontSize=15;fontColor=#232F3E;labelBackgroundColor=#FFFFFF;edgeStyle=orthogonalEdgeStyle;rounded=0;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;fontFamily=Times New Roman;fontStyle=1" target="gemini" value="21. Risk scoring request">
+          <mxGeometry relative="1" x="-0.0617" as="geometry">
+            <mxPoint as="offset" />
+            <Array as="points">
+              <mxPoint x="1855" y="1000" />
+              <mxPoint x="2250" y="1000" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
